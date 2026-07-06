@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../lib/auth';
 import { useTheme } from '../../lib/theme';
-import { MOCK_BIAS } from '../../lib/mockData';
+import { useData } from '../../lib/DataContext';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
@@ -33,8 +33,9 @@ const getPulseColor = (score: number) => {
 const Sidebar: React.FC = () => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { bias } = useData();
   const navigate = useNavigate();
-  const pulseColor = getPulseColor(MOCK_BIAS.fair_hiring_score);
+  const pulseColor = getPulseColor(bias.fair_hiring_score);
 
   const handleLogout = () => {
     logout();
@@ -80,7 +81,7 @@ const Sidebar: React.FC = () => {
                 className="sidebar-fairness-badge"
                 style={{ color: pulseColor }}
               >
-                {MOCK_BIAS.fair_hiring_score}
+                {bias.fair_hiring_score}
               </span>
             )}
           </NavLink>

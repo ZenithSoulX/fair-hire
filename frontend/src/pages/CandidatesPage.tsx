@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SlidersHorizontal, Search } from 'lucide-react';
 import PageHeader from '../components/layout/PageHeader';
 import CandidateCard from '../components/ui/CandidateCard';
-import { MOCK_CANDIDATES } from '../lib/mockData';
+import { useData } from '../lib/DataContext';
 import './CandidatesPage.css';
 
 const SORT_OPTIONS = ['Match score', 'Experience', 'Semantic score', 'Name'];
@@ -33,12 +33,13 @@ const EmptyState: React.FC<{ query: string }> = ({ query }) => (
 );
 
 const CandidatesPage: React.FC = () => {
+  const { candidates } = useData();
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('Match score');
   const [filter, setFilter] = useState<'all' | 'recovered'>('all');
   const [heatHover, setHeatHover] = useState<number | null>(null);
 
-  const sorted = [...MOCK_CANDIDATES].sort((a, b) => {
+  const sorted = [...candidates].sort((a, b) => {
     if (sort === 'Match score') return b.match_score - a.match_score;
     if (sort === 'Experience') return b.years_of_experience - a.years_of_experience;
     if (sort === 'Semantic score') return b.semantic_score - a.semantic_score;
@@ -60,7 +61,7 @@ const CandidatesPage: React.FC = () => {
       <PageHeader
         section="CANDIDATES"
         title="Ranked candidates"
-        subtitle={`${filtered.length} of ${MOCK_CANDIDATES.length} candidates shown. Ranked by skill match, semantic similarity, and project relevance.`}
+        subtitle={`${filtered.length} of ${candidates.length} candidates shown. Ranked by skill match, semantic similarity, and project relevance.`}
       />
 
       {/* Controls */}

@@ -1,0 +1,21 @@
+.git
+.gitignore
+.env
+.env.example
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Frontend dev files
+frontend/node_modules/
+frontend/src/
+frontend/public/
+frontend/*.json
+frontend/*.ts
+frontend/*.html
+frontend/README.md
+
+# Keep frontend/dist/ though!
+!frontend/dist/

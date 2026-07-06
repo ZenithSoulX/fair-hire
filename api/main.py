@@ -3,6 +3,8 @@ import json
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from agents.jd_agent import parse_jd
@@ -99,6 +101,20 @@ async def analyze_jd(req: AnalyzeRequest):
         import traceback
         raise HTTPException(status_code=500, detail=f"{type(e).__name__}: {e}\n{traceback.format_exc()}")
 
+# Serve the static files in the dist directory (assets, icons, etc.)
+FRONTEND_DIST = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
+
+if os.path.isdir(FRONTEND_DIST):
+    app.mount("/assets", StaticFiles(directory=os.path.join(FRONTEND_DIST, "assets")), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        # If the requested file exists in dist, serve it
+        dist_path = os.path.join(FRONTEND_DIST, full_path)
+        if os.path.isfile(dist_path) and full_path != "":
+            return FileResponse(dist_path)
+        # Otherwise, fallback to index.html (for React Router)
+        return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
 
 if __name__ == "__main__":
     import uvicorn

@@ -4,8 +4,8 @@ import { SlidersHorizontal, Sparkles, Upload, FileText, AlertCircle } from 'luci
 import PageHeader from '../components/layout/PageHeader';
 import KPICard from '../components/ui/KPICard';
 import CandidateCard from '../components/ui/CandidateCard';
-import { MOCK_CANDIDATES, MOCK_KPI, MOCK_JD, MOCK_BIAS } from '../lib/mockData';
-import type { Candidate, KPIData, BiasMetrics } from '../types';
+import { MOCK_JD } from '../lib/mockData';
+import { useData } from '../lib/DataContext';
 import { analyzeJobDescription } from '../lib/api';
 import './DashboardPage.css';
 
@@ -66,9 +66,7 @@ function extractSkills(text: string): string[] {
 const DashboardPage: React.FC = () => {
   const [jd, setJd] = useState(MOCK_JD);
   const [analyzing, setAnalyzing] = useState(false);
-  const [candidates, setCandidates] = useState<Candidate[]>(MOCK_CANDIDATES);
-  const [kpi, setKpi] = useState<KPIData>(MOCK_KPI);
-  const [bias, setBias] = useState<BiasMetrics>(MOCK_BIAS);
+  const { candidates, setCandidates, kpi, setKpi, bias, setBias, resetData } = useData();
   const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
@@ -112,7 +110,7 @@ const DashboardPage: React.FC = () => {
             <button className="btn btn-outline btn-sm">
               <SlidersHorizontal size={14} /> Filters
             </button>
-            <button className="btn btn-primary btn-sm" onClick={() => { setJd(''); setCandidates([]); }}>
+            <button className="btn btn-primary btn-sm" onClick={() => { setJd(''); resetData(); }}>
               <Sparkles size={14} /> New analysis
             </button>
           </>

@@ -4,13 +4,14 @@ import { ShieldCheck, TrendingUp, AlertTriangle, BarChart3, X, Check } from 'luc
 import PageHeader from '../components/layout/PageHeader';
 import KPICard from '../components/ui/KPICard';
 import AnimatedFunnel from '../components/ui/AnimatedFunnel';
-import { MOCK_BIAS, MOCK_CANDIDATES, MOCK_FUNNEL } from '../lib/mockData';
+import { MOCK_FUNNEL } from '../lib/mockData';
+import { useData } from '../lib/DataContext';
 import './BiasAuditPage.css';
-
-const recoveredCandidates = MOCK_CANDIDATES.filter(c => c.is_recovered);
 
 const BiasAuditPage: React.FC = () => {
   const navigate = useNavigate();
+  const { bias, candidates } = useData();
+  const recoveredCandidates = candidates.filter(c => c.is_recovered);
 
   return (
     <div className="page-wrapper">
@@ -29,14 +30,14 @@ const BiasAuditPage: React.FC = () => {
       <div className="grid-3 stagger-children">
         <KPICard
           title="RECOVERED"
-          value={MOCK_BIAS.recovered}
+          value={bias.recovered}
           subtitle="Qualified candidates recovered. Reintroduced into your active pipeline this month."
           valueColor="var(--color-success-text)"
           icon={<ShieldCheck size={16} />}
         />
         <KPICard
           title="PREVENTED"
-          value={MOCK_BIAS.talent_loss_prevented}
+          value={bias.talent_loss_prevented}
           suffix="%"
           subtitle="Talent loss prevented. Share of strong candidates that would have been filtered out."
           valueColor="var(--color-primary)"
@@ -44,7 +45,7 @@ const BiasAuditPage: React.FC = () => {
         />
         <KPICard
           title="ASSESSMENT"
-          value={MOCK_BIAS.bias_risk}
+          value={bias.bias_risk}
           subtitle="Bias risk. Legacy filters rely on CGPA and college tier."
           valueColor="var(--color-warning-text)"
           icon={<AlertTriangle size={16} />}
@@ -57,7 +58,7 @@ const BiasAuditPage: React.FC = () => {
         <AlertTriangle size={18} style={{ color: 'var(--color-warning)', flexShrink: 0, marginTop: 2 }} />
         <div>
           <p className="text-sm font-semibold" style={{ color: 'var(--color-warning-text)' }}>
-            {MOCK_BIAS.recovered} of your top candidates would have been rejected by traditional AI screening.
+            {bias.recovered} of your top candidates would have been rejected by traditional AI screening.
           </p>
           <p className="text-sm" style={{ color: 'var(--color-warning-text)', marginTop: 4, opacity: 0.85 }}>
             Filters applied: CGPA &lt; 7.0 and tier-1 college requirement.
@@ -84,10 +85,10 @@ const BiasAuditPage: React.FC = () => {
             </div>
             <div className="comparison-stats">
               {[
-                { label: 'Candidates surfaced', value: `${MOCK_BIAS.traditional_surfaced}` },
-                { label: 'Interviews scheduled', value: `${MOCK_BIAS.traditional_interviews}` },
-                { label: 'Hires', value: `${MOCK_BIAS.traditional_hires}` },
-                { label: 'Diverse hires', value: `${MOCK_BIAS.traditional_diverse}%` },
+                { label: 'Candidates surfaced', value: `${bias.traditional_surfaced}` },
+                { label: 'Interviews scheduled', value: `${bias.traditional_interviews}` },
+                { label: 'Hires', value: `${bias.traditional_hires}` },
+                { label: 'Diverse hires', value: `${bias.traditional_diverse}%` },
               ].map(({ label, value }) => (
                 <div key={label} className="comparison-stat">
                   <span className="comparison-stat-label">{label}</span>
@@ -123,10 +124,10 @@ const BiasAuditPage: React.FC = () => {
             </div>
             <div className="comparison-stats">
               {[
-                { label: 'Candidates surfaced', value: `${MOCK_BIAS.fairhire_surfaced}` },
-                { label: 'Interviews scheduled', value: `${MOCK_BIAS.fairhire_interviews}` },
-                { label: 'Hires', value: `${MOCK_BIAS.fairhire_hires}` },
-                { label: 'Diverse hires', value: `${MOCK_BIAS.fairhire_diverse}%` },
+                { label: 'Candidates surfaced', value: `${bias.fairhire_surfaced}` },
+                { label: 'Interviews scheduled', value: `${bias.fairhire_interviews}` },
+                { label: 'Hires', value: `${bias.fairhire_hires}` },
+                { label: 'Diverse hires', value: `${bias.fairhire_diverse}%` },
               ].map(({ label, value }) => (
                 <div key={label} className="comparison-stat">
                   <span className="comparison-stat-label">{label}</span>
@@ -165,7 +166,7 @@ const BiasAuditPage: React.FC = () => {
           <h2 className="section-title">Recovered qualified candidates</h2>
           <p className="section-subtitle">
             Strong matches that traditional filters would have removed from the pipeline.{' '}
-            <span className="badge badge-success">+{MOCK_BIAS.recovered} recovered</span>
+            <span className="badge badge-success">+{bias.recovered} recovered</span>
           </p>
         </div>
         <div className="table-wrapper">
@@ -239,7 +240,7 @@ const BiasAuditPage: React.FC = () => {
             {
               icon: <TrendingUp size={20} />,
               title: 'Broader qualified pool',
-              desc: `Interview pipeline grew from ${MOCK_BIAS.traditional_interviews} to ${MOCK_BIAS.fairhire_interviews} candidates per role, without lowering skill thresholds.`,
+              desc: `Interview pipeline grew from ${bias.traditional_interviews} to ${bias.fairhire_interviews} candidates per role, without lowering skill thresholds.`,
               color: 'var(--color-primary)',
             },
             {
@@ -251,7 +252,7 @@ const BiasAuditPage: React.FC = () => {
             {
               icon: <BarChart3 size={20} />,
               title: 'Stronger hiring quality',
-              desc: `Diverse hires rose from ${MOCK_BIAS.traditional_diverse}% to ${MOCK_BIAS.fairhire_diverse}% while first-year performance ratings held or improved.`,
+              desc: `Diverse hires rose from ${bias.traditional_diverse}% to ${bias.fairhire_diverse}% while first-year performance ratings held or improved.`,
               color: 'var(--color-warning-text)',
             },
           ].map(({ icon, title, desc, color }) => (
