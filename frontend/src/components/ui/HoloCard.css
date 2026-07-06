@@ -1,0 +1,65 @@
+.holo-card-wrapper {
+  position: relative;
+  /* Preserve 3d space for children if needed */
+  transform-style: preserve-3d;
+  /* Ensure it has a smooth return to 0,0 when mouse leaves */
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+/* The glow layer that follows the mouse */
+.holo-card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10; /* sits above the border but below content if carefully layered, or just sits on top with mix-blend-mode */
+  border-radius: inherit;
+  
+  /* Create the radial gradient centered at the mouse coordinates */
+  background: radial-gradient(
+    800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: overlay;
+}
+
+/* Specifically adjust for dark theme where we want a stronger glow */
+.dark-theme .holo-card-glow {
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(96, 165, 250, 0.15),
+    transparent 40%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Show glow only on hover */
+.holo-card-wrapper.hovering .holo-card-glow {
+  opacity: 1;
+}
+
+/* Make sure the content inherits radius and hides overflow if needed,
+   but without clipping the 3d effect. Usually border-radius is handled
+   by the child or we just wrap it. */
+.holo-card-content {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  /* Add a very subtle box-shadow reaction */
+  transition: box-shadow 0.3s ease;
+}
+
+.holo-card-wrapper.hovering .holo-card-content {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .holo-card-wrapper.hovering .holo-card-content {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(96, 165, 250, 0.2);
+}

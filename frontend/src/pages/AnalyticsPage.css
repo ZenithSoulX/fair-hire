@@ -1,0 +1,40 @@
+.analytics-chart-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.analytics-insights-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.analytics-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.chart-wrap { width: 100%; }
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.insight-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.insight-row:last-child { border-bottom: none; }
+.insight-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+
+@media (max-width: 900px) {
+  .analytics-main-row { grid-template-columns: 1fr; }
+}

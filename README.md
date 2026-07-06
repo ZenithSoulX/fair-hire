@@ -97,14 +97,13 @@ Designed with an intuitive interface that enables recruiters to upload job descr
 | Category | Technologies |
 |----------|--------------|
 | **AI Model** | Google Gemini 2.5 Flash |
-| **Programming Language** | Python |
+| **Programming Language** | Python, TypeScript |
+| **Backend Framework** | FastAPI |
+| **Frontend Framework** | React, Vite |
 | **Data Validation** | Pydantic |
 | **Embeddings** | Sentence Transformers |
 | **Retrieval** | BM25, FAISS, Reciprocal Rank Fusion (RRF) |
 | **Resume Parsing** | PyMuPDF, python-docx |
-| **Data Processing** | NumPy |
-| **Data Visualization** | Plotly |
-| **User Interface** | Streamlit |
 | **Data Format** | JSON |
 
 ---
@@ -192,6 +191,8 @@ Recruiters can customize evaluation weights, ranking preferences, and applicatio
 ```text
 fair-hire/
 │
+├── api/             # FastAPI backend server
+├── frontend/        # React + Vite frontend application
 ├── agents/          # Multi-agent AI pipeline
 ├── core/            # Shared resources and data management
 ├── retrieval/       # FAISS, BM25 & RRF retrieval
@@ -201,7 +202,7 @@ fair-hire/
 ├── artifacts/       # Generated indexes & embeddings
 ├── data/            # Candidate datasets
 │
-├── app.py           # Streamlit application
+├── build_artifacts.py # Script to precompute indexes
 ├── requirements.txt
 ├── .env.example
 └── README.md
@@ -218,45 +219,64 @@ git clone https://github.com/ZenithSoulX/fair-hire.git
 cd fair-hire
 ```
 
-### Create a Virtual Environment
+### Backend Setup
 
+1. Create a Virtual Environment
 ```bash
 python -m venv venv
 ```
 
-### Activate the Environment
+2. Activate the Environment
 
 **Windows**
-
 ```bash
 venv\Scripts\activate
 ```
 
 **macOS / Linux**
-
 ```bash
 source venv/bin/activate
 ```
 
-### Install Dependencies
-
+3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure Environment Variables
-
+4. Configure Environment Variables
 Create a `.env` file in the project root.
-
 ```env
 GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 ```
 
-### Run the Application
-
+5. Build Precompute Artifacts
 ```bash
-streamlit run app.py
+python build_artifacts.py
 ```
+
+6. Run the Backend API
+```bash
+python -m uvicorn api.main:app --host 0.0.0.0 --port 8000
+```
+
+### Frontend Setup
+
+1. Navigate to the frontend directory
+```bash
+cd frontend
+```
+
+2. Install Dependencies
+```bash
+npm install
+```
+
+3. Run the Development Server
+```bash
+npm run dev
+```
+
+The frontend will be available at `http://localhost:5174/` and the backend API at `http://localhost:8000/`.
 
 ---
 

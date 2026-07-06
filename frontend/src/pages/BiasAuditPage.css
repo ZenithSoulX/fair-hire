@@ -1,0 +1,99 @@
+.comparison-card { overflow: hidden; }
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.comparison-col {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.comparison-col.traditional { border-right: 1px solid var(--color-border); }
+.comparison-col.fairhire { background: var(--color-success-bg); }
+
+.comparison-col-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.comparison-col-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  margin-top: 2px;
+}
+.traditional-icon { background: var(--color-text-secondary); }
+.fairhire-icon { background: var(--color-success); }
+
+.comparison-col-title { font-size: 0.9375rem; font-weight: 700; }
+.comparison-col-sub { font-size: 0.75rem; color: var(--color-text-secondary); margin-top: 2px; }
+
+.comparison-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.comparison-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.comparison-stat:last-child { border-bottom: none; }
+.comparison-stat-label { font-size: 0.8125rem; color: var(--color-text-secondary); }
+.comparison-stat-value { font-size: 1rem; font-weight: 700; }
+.traditional-val { color: var(--color-text-primary); }
+.fairhire-val { color: var(--color-success-text); }
+
+.comparison-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.comparison-bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.traditional-bullet { color: var(--color-text-secondary); }
+.traditional-bullet svg { color: var(--color-error); flex-shrink: 0; margin-top: 2px; }
+.fairhire-bullet { color: var(--color-text-primary); }
+.fairhire-bullet svg { color: var(--color-success); flex-shrink: 0; margin-top: 2px; }
+
+.impact-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.impact-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .comparison-grid { grid-template-columns: 1fr; }
+  .comparison-col.traditional { border-right: none; border-bottom: 1px solid var(--color-border); }
+}

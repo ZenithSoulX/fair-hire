@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     print("\nBias Audit")
     print(audit)
-    for candidate in result.ranked_candidates[:10]:
+    for candidate in ranking.ranked_candidates[:10]:
 
         print(f"\nRank #{candidate.rank}")
         print(f"Candidate : {candidate.candidate_name}")

@@ -1,8 +1,8 @@
 import json
 
 
-with open("data/candidates.jsonl.gz", "r") as f:
-    candidates = [json.loads(line) for line in f]
+with open("data/sample_candidates.json", "r") as f:
+    candidates = json.load(f)
 
 candidate_lookup = {
     candidate["candidate_id"]: candidate

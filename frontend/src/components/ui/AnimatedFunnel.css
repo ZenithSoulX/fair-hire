@@ -1,0 +1,165 @@
+.animated-funnel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.funnel-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.funnel-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  padding: 10px 16px;
+  border-radius: 12px;
+}
+
+.funnel-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.traditional-dot {
+  background: var(--color-text-secondary);
+  opacity: 0.45;
+  border: 1px solid var(--color-border);
+}
+
+.fairhire-dot {
+  background: linear-gradient(135deg, #2563EB, #10B981);
+}
+
+.legend-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.legend-subtitle {
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+/* SVG Funnel Wrapper */
+.funnel-svg-wrapper {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* Funnel Stage Polygons */
+.funnel-poly {
+  cursor: pointer;
+  transition: opacity var(--transition-base), filter var(--transition-base), transform var(--transition-base);
+}
+
+.trad-poly {
+  opacity: 0.7;
+}
+
+.fair-poly {
+  opacity: 0.9;
+}
+
+.funnel-stage-group:hover .trad-poly {
+  opacity: 0.85;
+}
+
+.funnel-stage-group:hover .fair-poly {
+  opacity: 1;
+}
+
+/* Center Label Lane */
+.funnel-label-bg {
+  fill: var(--color-bg);
+  stroke: var(--color-border);
+  stroke-width: 1px;
+  transition: fill var(--transition-fast);
+}
+
+.funnel-stage-group:hover .funnel-label-bg {
+  fill: var(--color-primary-light);
+  stroke: var(--color-primary);
+}
+
+.funnel-stage-name {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  fill: var(--color-text-secondary);
+  font-family: 'Inter', sans-serif;
+  pointer-events: none;
+  transition: fill var(--transition-fast);
+}
+
+.funnel-stage-group:hover .funnel-stage-name {
+  fill: var(--color-primary);
+}
+
+/* Outer Count Values */
+.funnel-count {
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  fill: var(--color-text-primary);
+  pointer-events: none;
+  transition: transform var(--transition-base), fill var(--transition-base);
+}
+
+.traditional-count {
+  fill: var(--color-text-secondary);
+}
+
+.fairhire-count {
+  fill: var(--color-text-primary);
+}
+
+.funnel-stage-group:hover .traditional-count {
+  fill: var(--color-text-primary);
+  transform: translateX(-4px);
+}
+
+.funnel-stage-group:hover .fairhire-count {
+  fill: var(--color-success-text);
+  transform: translateX(4px);
+}
+
+/* Conversion overlays */
+.funnel-conversion-g rect {
+  box-shadow: var(--shadow-sm);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+}
+
+/* Dark Mode specific tweaks */
+.dark-theme .funnel-label-bg {
+  fill: var(--color-surface);
+  stroke: var(--color-border);
+}
+.dark-theme .funnel-stage-group:hover .funnel-label-bg {
+  fill: var(--color-primary-light);
+  stroke: var(--color-primary);
+}
+.dark-theme .traditional-dot {
+  background: var(--color-text-tertiary);
+  opacity: 0.5;
+}
+.dark-theme .traditional-count {
+  fill: var(--color-text-secondary);
+}
+.dark-theme .fairhire-count {
+  fill: var(--color-text-primary);
+}

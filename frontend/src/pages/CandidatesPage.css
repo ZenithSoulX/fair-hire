@@ -1,0 +1,143 @@
+.candidates-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.candidates-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+.candidates-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+.candidates-search { padding-left: 38px; }
+
+.candidates-filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.filter-pill-group {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  overflow: hidden;
+}
+.filter-pill {
+  padding: 7px 14px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  border-right: 1px solid var(--color-border);
+}
+.filter-pill:last-child { border-right: none; }
+.filter-pill.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+.filter-pill:hover:not(.active) { background: var(--color-bg); }
+
+.sort-select {
+  width: auto;
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.candidates-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+/* #13 — Empty State */
+.candidates-empty {
+  padding: 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* #9 — Score Heatmap */
+.score-heatmap {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.score-heatmap-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-tertiary);
+}
+.score-heatmap-cells {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.heatmap-cell {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+.heatmap-cell:hover { transform: scale(1.25); z-index: 2; }
+.heatmap-cell-empty {
+  background: var(--color-border-light);
+  cursor: default;
+}
+.heatmap-cell-empty:hover { transform: none; }
+.heatmap-cell-tooltip {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-text-primary);
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+.heatmap-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.heatmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+}
+.heatmap-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}

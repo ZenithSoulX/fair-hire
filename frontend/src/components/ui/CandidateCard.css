@@ -1,0 +1,200 @@
+.candidate-card {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.candidate-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* #5 — Score ring avatar */
+.score-ring-avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.candidate-identity { flex: 1; min-width: 0; }
+
+.candidate-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.candidate-score-num {
+  font-size: 1.25rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;   /* #11 */
+}
+.candidate-score-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+/* #11 — Tabular nums utility */
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+.candidate-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--color-bg);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-light);
+}
+.candidate-metric { }
+.candidate-metric-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-tertiary);
+  margin-bottom: 3px;
+}
+.candidate-metric-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* #15 — Expand toggle */
+.candidate-expand-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 12px;
+  width: 100%;
+  padding: 7px;
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.candidate-expand-toggle:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* #15 — Collapsible section */
+.candidate-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.candidate-details.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.candidate-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.candidate-explanation {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--color-primary-light);
+  border-radius: 10px;
+  border-left: 3px solid var(--color-primary);
+  margin-bottom: 4px;
+}
+
+/* #12 — Recovered badge shimmer */
+@keyframes badge-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.recovered-badge {
+  background: linear-gradient(
+    90deg,
+    var(--color-success-bg) 0%,
+    #bbf7d0 30%,
+    var(--color-success-bg) 60%,
+    #bbf7d0 100%
+  );
+  background-size: 200% auto;
+  animation: badge-shimmer 3s linear infinite;
+  color: var(--color-success-text);
+  cursor: help;
+}
+
+/* Card Highlight Flash (for Heatmap scroll navigation) */
+@keyframes border-flash {
+  0% { border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.25); transform: translateY(-4px); }
+  50% { border-color: var(--color-primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.25); transform: translateY(-4px); }
+  100% { border-color: var(--color-border); box-shadow: var(--shadow-md); transform: translateY(0); }
+}
+.candidate-card.highlight-flash {
+  animation: border-flash 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Alignment Scorecard Table */
+.candidate-comparison-table-wrap {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+.candidate-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.candidate-comparison-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--color-border-light);
+  border-bottom: 1px solid var(--color-border);
+}
+.candidate-comparison-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-primary);
+  vertical-align: middle;
+}
+.candidate-comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 600px) {
+  .candidate-metrics { grid-template-columns: repeat(2, 1fr); }
+}
+

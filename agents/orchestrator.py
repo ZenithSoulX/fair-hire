@@ -62,10 +62,24 @@ def run_pipeline(file_path: str):
             break
 
         candidate = candidate_lookup[
-            candidate_result["candidate_id"]
+            candidate_result.candidate_id
         ]
+        
+        profile = candidate.get("profile", {})
+        candidate_result.title = profile.get("current_title", "")
+        candidate_result.location = profile.get("location", "")
+        candidate_result.years_of_experience = profile.get("years_of_experience", 0.0)
+        candidate_result.skills = [s.get("name", "") for s in candidate.get("skills", [])][:5]
+        
+        edu = candidate.get("education", [{}])[0]
+        is_tier_3 = "tier_3" in str(edu.get("tier", "")).lower()
+        try:
+            is_low_cgpa = float(str(edu.get("grade", "10")).split()[0]) < 8.0
+        except:
+            is_low_cgpa = False
+        candidate_result.is_recovered = is_tier_3 or is_low_cgpa
 
-        candidate_result["reasoning"] = generate_reasoning(
+        candidate_result.reasoning = generate_reasoning(
             parsed_jd,
             candidate,
             candidate_result

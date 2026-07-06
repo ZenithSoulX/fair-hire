@@ -1,6 +1,16 @@
 from pathlib import Path
-import fitz 
-import docx
+
+try:
+    import fitz
+    _HAS_FITZ = True
+except ImportError:
+    _HAS_FITZ = False
+
+try:
+    import docx
+    _HAS_DOCX = True
+except ImportError:
+    _HAS_DOCX = False
 
 def read_file(file_path: str) -> str:
     
@@ -21,24 +31,18 @@ def read_file(file_path: str) -> str:
 
 
 def read_pdf(path: Path):
-
+    if not _HAS_FITZ:
+        raise ImportError("PyMuPDF (fitz) is not installed. Run: pip install pymupdf")
     document = fitz.open(path)
-
     text = ""
-
     for page in document:
         text += page.get_text()
-
     document.close()
-
     return text
 
 
 def read_docx(path: Path):
-
+    if not _HAS_DOCX:
+        raise ImportError("python-docx is not installed. Run: pip install python-docx")
     doc = docx.Document(path)
-
-    return "\n".join(
-        p.text
-        for p in doc.paragraphs
-    )
+    return "\n".join(p.text for p in doc.paragraphs)
