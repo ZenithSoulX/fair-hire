@@ -1,0 +1,2 @@
+EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
+TOP_K = 1000
