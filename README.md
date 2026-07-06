@@ -2,7 +2,7 @@
 
 # FairHire
 
-### Explainable Talent Intelligence for Fair and Transparent Hiring
+### Explainable AI Recruitment for Fair and Transparent Hiring
 
 <p>
   <img src="https://img.shields.io/badge/Python-3.11-blue?logo=python" alt="Python">
@@ -13,10 +13,8 @@
 </p>
 
 <p>
-  <a href="#">Live Demo</a> •
   <a href="https://github.com/ZenithSoulX/fair-hire">GitHub Repository</a> •
   <a href="#">Demo Video</a> •
-  <a href="#">Project Prototype</a>
 </p>
 
 </div>
