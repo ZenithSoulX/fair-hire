@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Google-Gemini%202.5%20Flash-4285F4?logo=google" alt="Gemini">
   <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit" alt="Streamlit">
   <img src="https://img.shields.io/badge/FAISS-Vector%20Search-success" alt="FAISS">
-  <img src="https://img.shields.io/badge/Google%20Gen%20AI%20Academy-APAC%20Hackathon-purple" alt="Hackathon">
+  <img src="https://img.shields.io/badge/Google%20Gen%20AI%20Academy-APAC-purple" alt="Google Gen AI Academy APAC">
 </p>
 
 <p>
